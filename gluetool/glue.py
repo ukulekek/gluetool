@@ -1,7 +1,10 @@
 # pylint: disable=too-many-lines
 
 import argparse
-import ConfigParser
+try:
+    import configparser
+except:
+    from six.moves import configparser
 import imp
 import logging
 import os
@@ -409,7 +412,7 @@ class Configurable(object):
 
         log_dict(self.debug, 'Loading configuration from following paths', paths)
 
-        parser = ConfigParser.ConfigParser()
+        parser = configparser.ConfigParser()
         parsed_paths = parser.read(paths)
 
         log_dict(self.debug, 'Read configuration files', parsed_paths)
@@ -420,7 +423,7 @@ class Configurable(object):
             try:
                 value = parser.get('default', name)
 
-            except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
+            except (configparser.NoOptionError, configparser.NoSectionError):
                 return
 
             if 'type' in params:

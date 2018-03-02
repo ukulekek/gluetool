@@ -35,6 +35,7 @@ if __name__ == '__main__':
               'packaging==16.8',
               'raven==6.0.0',
               'ruamel.yaml==0.15.34',
+              'six==1.11.0',
               'Sphinx==1.5.2',
               'sphinx-rtd-theme==0.1.9',
               'tabulate==0.8.2',
@@ -56,6 +57,7 @@ if __name__ == '__main__':
               'License :: OSI Approved :: BSD License',
               'Operating System :: POSIX :: Linux',
               'Programming Language :: Python :: 2.7',
+              'Programming Language :: Python :: 3',
               'Programming Language :: Python :: Implementation :: CPython',
               'Topic :: Software Development :: Libraries :: Application Frameworks',
               'Topic :: Utilities'
