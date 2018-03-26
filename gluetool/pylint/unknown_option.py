@@ -14,6 +14,7 @@ import pylint
 from pylint.checkers import BaseChecker, utils
 from pylint.interfaces import IAstroidChecker
 
+import six
 
 BASE_ID = 76
 
@@ -56,10 +57,10 @@ class OptionsGatherer(object):
 
         # Fill it with the module data by executing the module AST node withing the context
         # of our placeholder's namespace.
-        exec node.root().as_string() in module.__dict__
+        six.exec_(node.root().as_string(), module.__dict__)
 
         # Now "evaluate" options structure inside this module, assign it to chosen name...
-        exec '__pylint_options = {}'.format(node.value.as_string()) in module.__dict__
+        six.exec_('__pylint_options = {}'.format(node.value.as_string()), module.__dict__)
 
         # ... and now pull the evaluated, Python data structure, out of the module namespace.
         options = module.__dict__['__pylint_options']
@@ -67,7 +68,7 @@ class OptionsGatherer(object):
         option_names = OPTION_NAMES[node.root().file] = []
 
         def _add_options(options):
-            for option_name in options.iterkeys():
+            for option_name in six.iterkeys(options)
                 if isinstance(option_name, str):
                     option_names.append(option_name)
 

@@ -12,6 +12,7 @@ import sys
 import ast
 
 from functools import partial
+from six import iteritems
 
 import enum
 import jinja2
@@ -330,7 +331,7 @@ class Configurable(object):
 
         # Sort options by their names - no code has a strong option on their order, so force
         # one to all users of this helper.
-        option_names = sorted(options.keys(), key=lambda x: x[1] if isinstance(x, tuple) else x)
+        option_names = sorted(list(options.keys()), key=lambda x: x[1] if isinstance(x, tuple) else x)
 
         for names in option_names:
             params = options[names]
@@ -1589,7 +1590,7 @@ class Glue(Configurable):
                     continue
                 usage.append('')
                 usage.append('%-2s%s' % (' ', group))
-                for key, val in sorted(plist[group].iteritems()):
+                for key, val in sorted(iteritems(plist[group])):
                     usage.append('%-4s%-32s %s' % ('', key, val))
 
         return '\n'.join(usage)
