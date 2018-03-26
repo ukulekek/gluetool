@@ -39,7 +39,7 @@ if __name__ == '__main__':
               'Sphinx==1.5.2',
               'sphinx-rtd-theme==0.1.9',
               'tabulate==0.8.2',
-              'urlnorm==1.1.4'
+              'urlnormalizer==1.2.0'
           ],
           description='Python framework for constructing command-line pipelines',
           # pylint: disable=line-too-long
