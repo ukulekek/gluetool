@@ -26,6 +26,8 @@ import six
 import sphinx.writers.text
 import sphinx.locale
 
+from six import iteritems
+
 from .color import Colors
 from .log import Logging
 
@@ -422,7 +424,7 @@ def extract_eval_context_info(source, logger=None):
         eval(code, {}, module_locals)
 
         return {
-            name: trim_docstring(description) for name, description in module_locals['__content__'].iteritems()
+            name: trim_docstring(description) for name, description in iteritems(module_locals['__content__'])
         }
 
     # pylint: disable=broad-except
@@ -447,7 +449,7 @@ def eval_context_help(source):
         return ''
 
     context_content = {
-        name: docstring_to_help(description, line_prefix='') for name, description in context_info.iteritems()
+        name: docstring_to_help(description, line_prefix='') for name, description in iteritems(context_info)
     }
 
     return jinja2.Template("""
