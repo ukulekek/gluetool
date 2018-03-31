@@ -1252,7 +1252,7 @@ class Glue(Configurable):
             module = self._import_module(import_name, filepath)
 
         except GlueError as e:
-            self.warn("ignoring module '{}': {}".format(module_name, e.message))
+            self.warn("ignoring module '{}': {}".format(module_name, e))
             return
 
         return module
