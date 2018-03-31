@@ -189,10 +189,10 @@ class Gluetool(object):
         exit_status = 0 if failure.soft is True else -1
 
         if failure.module:
-            msg = "Exception raised in module '{}': {}".format(failure.module.unique_name, failure.exc_info[1].message)
+            msg = "Exception raised in module '{}': {}".format(failure.module.unique_name, failure.exc_info[1])
 
         else:
-            msg = "Exception raised: {}".format(failure.exc_info[1].message)
+            msg = "Exception raised: {}".format(failure.exc_info[1])
 
         logger.exception(msg, exc_info=failure.exc_info)
 

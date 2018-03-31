@@ -113,7 +113,7 @@ _TRACEBACK_TEMPLATE = """
   File "{{ filepath }}", line {{ lineno }}, in {{ fn }}
     {{ text | default('') }}
 
-    Local variables:{% for name in frame.f_locals.iterkeys() | sort %}
+    Local variables:{% for name in frame.f_locals.items() | sort %}
         {{ name }} = {{ frame.f_locals[name] }}
     {%- endfor %}
 {% endfor %}
