@@ -15,7 +15,6 @@ import subprocess
 import sys
 import threading
 import time
-import urllib2
 import warnings
 
 from six import iteritems

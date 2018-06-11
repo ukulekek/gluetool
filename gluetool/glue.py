@@ -1,10 +1,6 @@
 # pylint: disable=too-many-lines
 
 import argparse
-try:
-    import configparser
-except:
-    from six.moves import configparser
 import imp
 import logging
 import os
@@ -12,7 +8,8 @@ import sys
 import ast
 
 from functools import partial
-from six import iteritems
+from six import iteritems, reraise
+from six.moves import configparser
 
 import enum
 import jinja2
@@ -1242,7 +1239,7 @@ class Glue(Configurable):
                 return
 
         except GlueError as e:
-            self.warn("ignoring file '{}': {}".format(module_name, e.message))
+            self.warn("ignoring file '{}': {}".format(module_name, str(e)))
             return
 
         # Try to import file as a Python module
@@ -1534,7 +1531,7 @@ class Glue(Configurable):
                 # done with ``add_shared``, and should ``add_shared`` crash, ``exc`` would be added
                 # to a chain anyway.
                 module.add_shared()
-                raise exc.__class__, exc, sys.exc_info()[2]
+                reraise(exc.__class__, exc, sys.exc_info()[2])
 
             else:
                 module.add_shared()
